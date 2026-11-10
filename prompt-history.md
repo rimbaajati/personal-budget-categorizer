@@ -2,13 +2,13 @@
 
 Agentic coding log for the MVP build. Every prompt below was sent, in this order and unchanged, to the coding agent inside the IDE.
 
-| Item | Detail |
-| --- | --- |
-| Tool | Google Antigravity IDE (agentic coding) |
-| Stack | Next.js (App Router), TypeScript, Tailwind CSS, Vitest |
-| AI API in the app | Google Gemini API (called server-side only) |
-| Prompt language | English |
-| Repository | https://github.com/rimbaajati/personal-budget-categorizer |
+| Item              | Detail                                                    |
+| ----------------- | --------------------------------------------------------- |
+| Tool              | Google Antigravity IDE (agentic coding)                   |
+| Stack             | Next.js (App Router), TypeScript, Tailwind CSS, Vitest    |
+| AI API in the app | Google Gemini API (called server-side only)               |
+| Prompt language   | English                                                   |
+| Repository        | https://github.com/rimbaajati/personal-budget-categorizer |
 
 Note: the prompts were drafted with AI assistance (Claude) from the product decisions made in Task 1, then executed by the IDE agent. No application code was copied and pasted by hand; all code was generated and tested by the agent.
 
@@ -180,3 +180,18 @@ Finish the project:
 ```
 
 **Result:** README written, lint and build run, `.env.example` contains placeholders only, changes pushed to `origin/main`. The agent listed the Vercel environment variables to set: `GEMINI_API_KEY` and `GEMINI_MODEL`.
+
+## Prompt 6 : Fix Error Deploy
+
+The Vercel build fails on "npm install" with ERESOLVE: vitest@5.1.0
+needs @types/node "^22.0.0 || >=24.0.0", but the project has
+@types/node "^20". Fix the dependency conflict properly without using
+--force or --legacy-peer-deps:
+
+1. Upgrade @types/node to a version compatible with both vitest 5.1.0
+   and vite 8.3.7 (for example ^22.12.0).
+2. Run a clean install (delete node_modules and package-lock.json, then
+   npm install) and make sure it completes with no ERESOLVE errors.
+3. Run npm run lint, npm run test (vitest) and npm run build, and fix
+   anything that breaks.
+4. Commit with a clear message and push to origin main.
